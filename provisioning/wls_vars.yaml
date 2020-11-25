@@ -1,0 +1,3 @@
+jdk_rpm: files/jdk-8u192-linux-x64.rpm
+wls_jar: files/fmw_12.1.3.0.0_wls.jar
+wls_zip: files/fmw_12.1.3.0.0_wls.zip

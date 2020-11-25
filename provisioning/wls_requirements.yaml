@@ -1,0 +1,4 @@
+---
+- name: "lean_delivery.weblogic"
+  src: https://github.com/nhojpatrick/lean-delivery_ansible-role-weblogic
+  version: software-install-only

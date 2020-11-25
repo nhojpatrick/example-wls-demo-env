@@ -1,0 +1,10 @@
+---
+- name: WebLogic Installation by Ansible
+  hosts: localhost
+  vars_files:
+    - wls_vars.yaml
+
+  tasks:
+
+  - name: WebLogic Installation Tasks
+    include_tasks: wls_tasks.yaml

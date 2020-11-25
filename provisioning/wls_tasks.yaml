@@ -1,0 +1,56 @@
+---
+- name: JDK Installer - Check if present
+  stat:
+    path: "{{ jdk_rpm }}"
+  register: jdk_rpm_chk
+
+- name: JDK Installer - Fail if missing
+  fail:
+    msg: Missing  JDK Installer at {{ jdk_rpm }}
+  when: not jdk_rpm_chk.stat.exists
+
+- name: JDK Installer - Install
+  become: true
+  yum:
+    name: "{{ jdk_rpm }}"
+    state: present
+
+- name: WLS Zip - Check if present
+  stat:
+    path: "{{ wls_zip }}"
+  register: wls_zip_chk
+
+- name: WLS Jar - Check if present
+  stat:
+    path: "{{ wls_jar }}"
+  register: wls_jar_chk
+
+- name: WLS Zip or Jar - Fail if missing
+  fail:
+    msg: Missing  JDK Installer at {{ jdk_rpm }}
+  when:
+    - not wls_zip_chk.stat.exists
+    - not wls_jar_chk.stat.exists
+
+- name: WLS Zip - Convert weblogic has installed (zip containing the jar)
+  archive:
+    path: "{{ wls_jar }}"
+    dest: "{{ wls_zip }}"
+    format: zip
+  when: not wls_zip_chk.stat.exists
+
+- name: Ensure weblogic installed
+  include_role:
+    name: lean_delivery.weblogic
+  vars:
+    install_type: "WebLogic Server"
+    wls_version: "12.1.3.0.0"
+    wls_path: "/opt/weblogic"
+    wls_user: "weblogic"
+    wls_group: "weblogic"
+    transport: "local"
+    transport_local: "{{ wls_zip }}"
+    domain:
+      create: False
+    node_manager:
+      install: False
