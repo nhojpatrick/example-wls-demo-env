@@ -16,3 +16,11 @@
   yum:
     name: "git"
     state: latest
+
+- name: SELinux dependencies
+  become: true
+  yum:
+    name:
+      - libselinux-python
+      - libsemanage-python
+    state: latest

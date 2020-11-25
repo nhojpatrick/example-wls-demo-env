@@ -5,6 +5,14 @@
     name: openssl
     state: present
 
+# required to allow mod_proxy to make outbound connections
+- name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+  become: true
+  ansible.posix.seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
+
 - name: Web - Ensure web installed
   include_role:
     name: geerlingguy.apache

@@ -33,6 +33,9 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "provisioning/setup_vagrant.yaml"
     end
 
+    # required to open outbound connections from mod_proxy due to selinux
+    inst.vm.provision "shell", inline: "ansible-galaxy collection install ansible.posix --collections-path=/home/vagrant/.ansible/collections --force"
+
     inst.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"
 
