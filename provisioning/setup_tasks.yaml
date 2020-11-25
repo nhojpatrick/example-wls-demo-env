@@ -24,3 +24,16 @@
       - libselinux-python
       - libsemanage-python
     state: latest
+
+- name: Static DNS Setup
+  become: yes
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '.*{{ item.host }}$'
+    line: "{{ item.ip }} {{ item.host }}"
+    state: present
+  with_items:
+    - { ip: '192.168.10.10', host: 'webhost.example.tld' }
+    - { ip: '192.168.10.10', host: 'webhost0.example.tld' }
+    - { ip: '192.168.10.20', host: 'wlshost0.example.tld' }
+    - { ip: '192.168.10.21', host: 'wlshost1.example.tld' }
