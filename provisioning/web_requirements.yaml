@@ -1,0 +1,4 @@
+---
+- name: "geerlingguy.apache"
+  src: https://github.com/nhojpatrick/geerlingguy_ansible-role-apache
+  version: use-become

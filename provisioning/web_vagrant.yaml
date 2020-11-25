@@ -1,0 +1,10 @@
+---
+- name: Web Installation by Vagrant/Ansible
+  hosts: all
+  vars_files:
+    - web_vars.yaml
+
+  tasks:
+
+  - name: Web Installation Tasks
+    include_tasks: web_tasks.yaml

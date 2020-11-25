@@ -1,0 +1,8 @@
+---
+- name: Generic Shared Setup by Vagrant/Ansible
+  hosts: all
+
+  tasks:
+
+  - name: Generic Shared Setup Tasks
+    include_tasks: setup_tasks.yaml

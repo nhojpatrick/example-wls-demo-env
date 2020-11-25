@@ -1,0 +1,8 @@
+---
+- name: Generic Shared Setup by Ansible
+  hosts: localhost
+
+  tasks:
+
+  - name: Generic Shared Setup Tasks
+    include_tasks: setup_tasks.yaml

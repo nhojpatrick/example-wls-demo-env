@@ -1,0 +1,41 @@
+---
+- name: OpenSSL - Installed
+  become: true
+  yum:
+    name: openssl
+    state: present
+
+- name: Web - Ensure web installed
+  include_role:
+    name: geerlingguy.apache
+
+- name: Web - Add wwwdata group
+  become: True
+  group:
+    name: wwwdata
+    state: present
+
+- name: Web - Add vagrant to wwwdata group
+  become: True
+  user:
+    name: vagrant
+    groups: wwwdata
+    append: yes
+
+- name: Web - Create directory localhost
+  become: True
+  file:
+    path: /var/www/vhosts/localhost/
+    state: directory
+    owner: root
+    group: wwwdata
+    recurse: yes
+
+- name: Web - Copy localhost index.html
+  become: True
+  copy:
+    src: /vagrant/www/localhost/index.html
+    dest: /var/www/vhosts/localhost/index.html
+    owner: root
+    group: wwwdata
+    backup: no
