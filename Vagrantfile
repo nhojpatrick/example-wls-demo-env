@@ -57,6 +57,7 @@ Vagrant.configure("2") do |config|
     inst.vm.network "private_network", ip: "192.168.10.20"
 
     inst.vm.network :forwarded_port, guest: 7001, host: 17001
+    inst.vm.network :forwarded_port, guest: 7101, host: 17101
 
     inst.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"
@@ -82,6 +83,8 @@ Vagrant.configure("2") do |config|
     inst.vm.hostname = "wlshost1"
 
     inst.vm.network "private_network", ip: "192.168.10.21"
+
+    inst.vm.network :forwarded_port, guest: 7201, host: 17201
 
     inst.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"
