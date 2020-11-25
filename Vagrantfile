@@ -33,6 +33,8 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "provisioning/setup_vagrant.yaml"
     end
 
+    #inst.vm.provision :reload
+
     # required to open outbound connections from mod_proxy due to selinux
     inst.vm.provision "shell", inline: "ansible-galaxy collection install ansible.posix --collections-path=/home/vagrant/.ansible/collections --force"
 
@@ -45,6 +47,8 @@ Vagrant.configure("2") do |config|
 
       ansible.playbook = "provisioning/web_vagrant.yaml"
     end
+
+    #inst.vm.provision :reload
   end
 
   config.vm.define "wlshost0", autostart: true do |inst|
@@ -59,6 +63,8 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "provisioning/setup_vagrant.yaml"
     end
 
+    #inst.vm.provision :reload
+
     inst.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"
 
@@ -68,6 +74,8 @@ Vagrant.configure("2") do |config|
 
       ansible.playbook = "provisioning/wls_vagrant.yaml"
     end
+
+    #inst.vm.provision :reload
   end
 
   config.vm.define "wlshost1", autostart: true do |inst|
@@ -80,6 +88,8 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "provisioning/setup_vagrant.yaml"
     end
 
+    #inst.vm.provision :reload
+
     inst.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"
 
@@ -89,6 +99,8 @@ Vagrant.configure("2") do |config|
 
       ansible.playbook = "provisioning/wls_vagrant.yaml"
     end
+
+    #inst.vm.provision :reload
   end
 
 end
